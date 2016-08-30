@@ -4,7 +4,7 @@
 # Author : Zachary Igielman
 
 #import neccesary libraries (that tell python how to interact with time and RPiLarm)
-import time, RPiLarm, sys
+import time, Alarm, sys
 
 #set up the connection to RPiLarm
 RPiLarm.init()
