@@ -1,11 +1,11 @@
 #!/usr/bin/python
 #
-# THIS IS THE RPiLarm LIBRARY
+# This is the MakeTronix.co.uk Alarm Library
 #
-# This is a way of talking to the components of RPiLarm
+# This is a means of talking to the components of MakeTronix.co.uk Alarm
 #
 # Created by Zachary Igielman, December 2015
-# Copyright Zachary Igielman & Jake Blumenow, BlueMan Tech (RPiLarm)
+# Copyright Zachary Igielman & Jake Blumenow, MakeTronix (Alarm)
 #
 # This code is in the public domain and may be freely copied and used
 # No warranty is provided or implied
@@ -15,11 +15,11 @@
 # General Functions
 # (Both versions)
 #
-# init(). Initialises GPIO pins, switches motors and LEDs Off, etc
-# cleanup(). Sets all motors and LEDs off and sets GPIO to standard values
+# init(). Initialises GPIO pins
+# cleanup(). Turns all components off and sets GPIO to standard values
 #======================================================================
 #======================================================================
-# RPiLarm Functions
+# Alarm Functions
 #
 # getMotion(): returns the state of the motion sensor
 # getKey(): waits for user to press and returns the number
@@ -45,13 +45,13 @@ PIR = 8
 
 # General Functions
 #
-# init(). Initialises GPIO pins, switches motors and LEDs Off, etc
+# init(). Initialises GPIO pins
 def init():
     #use physical pin numbering
     GPIO.setmode(GPIO.BOARD)
-    GPIO.setwarnings(False)
+    GPIO.set_warnings(False)
 
-    #set up LED, buzzer, PIR and keys (buttons need pull up resistor)
+    #set up LED, buzzer, PIR and keys
     GPIO.setup(LED, GPIO.OUT)
     GPIO.setup(BUZZER, GPIO.OUT)
     GPIO.setup(PIR, GPIO.IN)
@@ -59,7 +59,7 @@ def init():
         GPIO.setup(v, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
-# cleanup(). Sets all motors and LEDs off and sets GPIO to standard values
+# cleanup(). Turns all components off and sets GPIO to standard values
 def cleanup():
     GPIO.output(BUZZER, 0)
     GPIO.output(LED, 0)
@@ -75,7 +75,7 @@ def cleanup():
 
 
 #======================================================================
-# RPiLarm Functions
+# Alarm Functions
 
 # getMotion(): returns the state of the motion sensor
 def getMotion():
@@ -85,34 +85,33 @@ def getMotion():
 # getKey(): waits for user to press and returns the number
 def getKey():
     s = None
-    #wait for press
     while s==None:
-        #scroll through keys
         for k, v in KEYPAD_NUMBERS.iteritems():
-            #check if key is pressed and store its numerical value
-            if not GPIO.input(v):
-                s=k
-    #return the key's value
+            if GPIO.input(k):
+                s=v
     return s
+
+
+# digit(): waits to recieve one keypress and returns number
+def digit():
+    # Loop while waiting for a keypress
+    r = None
+    while r == None:
+        r = kp.getKey()
+    return r
+
 
 # getCode(): waits for user to enter four numbers and returns code
 def getCode():
-    #correct array to store key presses
-    code=[]
-    #wait until the code is four digits
-    while len(code)<4:
-        #wait for the user to stop pressing (to stop one press from being counted as multiple presses)
-        time.sleep(1)
-        #wait for a keypress and store the value
-        i = getKey()
-        #if they pressed delete, remove a digit
-        if i=='DEL':
-            if len(code)>0:
-                code.pop()
-        #or add a digit
-        else:
-            code.append(i)
-    return code
+    # Getting digit 1, printing it, then sleep to allow the next digit press.
+    d1 = digit()
+    sleep(1)
+    d2 = digit()
+    sleep(1)
+    d3 = digit()
+    sleep(1)
+    d4 = digit()
+    return BLAH
 
 
 # sound(secs): makes buzzer sound for time duration of seconds
@@ -147,5 +146,3 @@ def lightOn():
 # lightOff(): turns LED off permenantly
 def lightOff():
     GPIO.output(LED, 0)
-
-
