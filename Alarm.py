@@ -55,7 +55,7 @@ def init():
     GPIO.setup(LED, GPIO.OUT)
     GPIO.setup(BUZZER, GPIO.OUT)
     GPIO.setup(PIR, GPIO.IN)
-    for k, v in KEYPAD_NUMBERS.iteritems():
+    for k, v in KEYPAD_NUMBERS.items():
         GPIO.setup(v, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
@@ -86,9 +86,9 @@ def getMotion():
 def getKey():
     s = None
     while s==None:
-        for k, v in KEYPAD_NUMBERS.iteritems():
-            if GPIO.input(k):
-                s=v
+        for k, v in KEYPAD_NUMBERS.items():
+            if GPIO.input(v):
+                s=k
     return s
 
 
