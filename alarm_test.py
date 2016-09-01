@@ -3,7 +3,7 @@
 # this is a basic alarm
 # Author : Zachary Igielman
 
-#import neccesary libraries (that tell python how to interact with time and RPiLarm)
+#import neccesary libraries (that tell python how to interact with time and the board)
 import time, Alarm, sys, thread
 
 #set secret code to 1 2 3 4
@@ -15,7 +15,7 @@ global correct
 correct=0
 
 #set up the connection to RPiLarm
-RPiLarm.init()
+Alarm.init()
 
 #this function checks if the code is entered correctly in a seperate thread (in the background)
 def codeThread():
@@ -24,7 +24,7 @@ def codeThread():
         #grab the global variable
         global correct
         #read the keypad (wait for a code to be pressed)
-        a=RPiLarm.getCode()
+        a=Alarm.getCode()
         #check of the code is correct
         if a==KEY:
             #change the global variable, informing the other thread (background task) that the code has been entered correctly
@@ -32,11 +32,11 @@ def codeThread():
 
 #beep for thirty seconds giving the person a minute to leave the room
 for n in range(30):
-    RPiLarm.sound(1)
+    Alarm.sound(1)
     time.sleep(1)
 
 #wait for motion
-while not RPiLarm.getMotion():
+while not Alarm.getMotion():
     time.sleep(1)
 
 #when there is motion, start the code thread that checks if the correct code is entered
@@ -45,7 +45,7 @@ thread.start_new_thread(codeThread, ())
 #beep until the code is entered correctly or one minute is up
 n=0
 while n<30 and not correct:
-    RPiLarm.sound(1)
+    Alarm.sound(1)
     time.sleep(1)
     n=n+1
 
