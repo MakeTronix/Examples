@@ -12,7 +12,7 @@ Alarm.init()
 #call the getCode() function from the library that waits for a key and returns its value
 k=Alarm.getCode()
 #print the value
-print k
+print(k)
 
 #stop the script
 Alarm.cleanup()

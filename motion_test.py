@@ -9,15 +9,15 @@ import time, Alarm, sys
 #set up the connection to the board
 Alarm.init()
 
-#wait for 10 seconds
-time.sleep(10)
+#wait for 5 seconds
+time.sleep(5)
 
 #wait for motion
-while not Alarm.getMotion():
+while Alarm.getMotion()==0:
     #check for motion every second
     time.sleep(1)
 #inform the user that motion has been detected
-print 'alarm'
+print("alarm")
 
 #stop the script
 Alarm.cleanup()

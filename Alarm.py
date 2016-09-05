@@ -34,6 +34,7 @@
 
 # Import all necessary libraries
 import RPi.GPIO as GPIO, time
+from time import sleep
 
 # Define pin numbers for keys
 KEYPAD_NUMBERS = {1: 5, 2: 13, 3: 26, 4: 7, 5: 15, 6: 24, 7: 11, 8: 19, 9: 22, 0: 21, 'DEL': 23};
@@ -49,7 +50,6 @@ PIR = 8
 def init():
     #use physical pin numbering
     GPIO.setmode(GPIO.BOARD)
-    GPIO.set_warnings(False)
 
     #set up LED, buzzer, PIR and keys
     GPIO.setup(LED, GPIO.OUT)
@@ -87,7 +87,7 @@ def getKey():
     s = None
     while s==None:
         for k, v in KEYPAD_NUMBERS.items():
-            if GPIO.input(v):
+            if GPIO.input(v)==0:
                 s=k
     return s
 
@@ -97,21 +97,24 @@ def digit():
     # Loop while waiting for a keypress
     r = None
     while r == None:
-        r = kp.getKey()
+        r = getKey()
+    print(r)
     return r
 
 
 # getCode(): waits for user to enter four numbers and returns code
 def getCode():
     # Getting digit 1, printing it, then sleep to allow the next digit press.
-    d1 = digit()
-    sleep(1)
-    d2 = digit()
-    sleep(1)
-    d3 = digit()
-    sleep(1)
-    d4 = digit()
-    return BLAH
+    entered=[]
+    while len(entered)<4:
+        x=digit()
+        if x=="DEL":
+            if len(entered)>0:
+                entered.pop()
+        else:
+            entered.append(x)
+        sleep(1)
+    return entered
 
 
 # sound(secs): makes buzzer sound for time duration of seconds
