@@ -4,7 +4,7 @@
 # Author : Zachary Igielman
 
 #import neccesary libraries (that tell python how to interact with time and the board)
-import time, Alarm, sys, thread
+import time, Alarm, sys, _thread
 
 #set secret code to 1 2 3 4
 KEY=[1, 2, 3, 4]
@@ -40,7 +40,7 @@ while not Alarm.getMotion():
     time.sleep(1)
 
 #when there is motion, start the code thread that checks if the correct code is entered
-thread.start_new_thread(codeThread, ())
+_thread.start_new_thread(codeThread, ())
 
 #beep until the code is entered correctly or one minute is up
 n=0
@@ -54,5 +54,5 @@ while not correct:
     RPiLarm.sound(1)
 
 #stop the script when the code is entered correctly
-RPiLarm.cleanup()
+Alarm.cleanup()
 sys.exit(0)

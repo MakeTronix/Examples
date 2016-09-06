@@ -98,7 +98,6 @@ def digit():
     r = None
     while r == None:
         r = getKey()
-    print(r)
     return r
 
 
