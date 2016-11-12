@@ -14,7 +14,7 @@ KEY=[1, 2, 3, 4]
 global correct
 correct=0
 
-#set up the connection to RPiLarm
+#set up the connection to the board
 Alarm.init()
 
 #this function checks if the code is entered correctly in a seperate thread (in the background)
@@ -29,10 +29,12 @@ def codeThread():
         if a==KEY:
             #change the global variable, informing the other thread (background task) that the code has been entered correctly
             correct=1
+        else:
+            print("Incorrect, try again")
 
 #beep for thirty seconds giving the person a minute to leave the room
 for n in range(30):
-    Alarm.sound(1)
+    Alarm.light(1)
     time.sleep(1)
 
 #wait for motion
@@ -45,13 +47,13 @@ _thread.start_new_thread(codeThread, ())
 #beep until the code is entered correctly or one minute is up
 n=0
 while n<30 and not correct:
-    Alarm.sound(1)
+    Alarm.light(1)
     time.sleep(1)
     n=n+1
 
 #sound the alarm until the code is entered correctly
 while not correct:
-    RPiLarm.sound(1)
+    Alarm.sound(1)
 
 #stop the script when the code is entered correctly
 Alarm.cleanup()
