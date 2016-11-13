@@ -32,10 +32,10 @@ def codeThread():
         else:
             print("Incorrect, try again")
 
-#beep for thirty seconds giving the person a minute to leave the room
+#flash for thirty seconds giving the person a minute to leave the room
 for n in range(30):
-    Alarm.light(1)
-    time.sleep(1)
+    Alarm.light(0.5)
+    time.sleep(0.5)
 
 #wait for motion
 while not Alarm.getMotion():
@@ -47,8 +47,8 @@ _thread.start_new_thread(codeThread, ())
 #beep until the code is entered correctly or one minute is up
 n=0
 while n<30 and not correct:
-    Alarm.light(1)
-    time.sleep(1)
+    Alarm.light(0.5)
+    time.sleep(0.5)
     n=n+1
 
 #sound the alarm until the code is entered correctly
