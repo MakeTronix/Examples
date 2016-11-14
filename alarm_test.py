@@ -17,10 +17,13 @@ correct=0
 #set up the connection to the board
 Alarm.init()
 
+global running_flag = True
+
 #this function checks if the code is entered correctly in a seperate thread (in the background)
 def codeThread():
+    global running_flag
     #repeat forever
-    while True:
+    while running_flag:
         #grab the global variable
         global correct
         #read the keypad (wait for a code to be pressed)
@@ -57,4 +60,4 @@ while not correct:
 
 #stop the script when the code is entered correctly
 Alarm.cleanup()
-sys.exit(0)
+running_flag=False
