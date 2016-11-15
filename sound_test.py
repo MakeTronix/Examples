@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # sound_test.py
 # beeps five times
 # Author : Zachary Igielman
