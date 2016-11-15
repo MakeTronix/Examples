@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #
 # This is the MakeTronix.co.uk Alarm Library
 #
