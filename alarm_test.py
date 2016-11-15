@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # alarm_test.py
 # this is a basic alarm
 # Author : Zachary Igielman
