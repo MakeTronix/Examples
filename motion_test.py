@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # motion_test.py
 # waits for 10 seconds and then waits until motion, when motion detected, prints 'alarm'
 # Author : Zachary Igielman
