@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # keypad_test.py
 # waits for a key to be pressed and prints the numerical value
 # Author : Zachary Igielman
