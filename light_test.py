@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # light_test.py
 # blinks LED 5 times
 # Author : Zachary Igielman
