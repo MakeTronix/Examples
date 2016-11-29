@@ -4,7 +4,7 @@
 # Author : Zachary Igielman
 
 #import neccesary libraries (that tell python how to interact with time and the board)
-import time, Alarm, sys, _thread
+import time, Alarm, _thread
 
 #set secret code to 1 2 3 4
 KEY=[1, 2, 3, 4]
