@@ -4,7 +4,7 @@
 # Author : Zachary Igielman
 
 #import neccesary libraries (that tell python how to interact with time and the board)
-import time, Alarm, sys
+import time, Alarm
 
 #set up the connection to the board
 Alarm.init()
@@ -17,4 +17,3 @@ for n in range(5):
 
 #stop the script
 Alarm.cleanup()
-sys.exit(0)
